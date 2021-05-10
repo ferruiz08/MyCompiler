@@ -1,0 +1,29 @@
+lexema                 Tipo           Valor                       Longitud
+_STR0                  String         "Ingrese un valor pivot mayor o igual a 1: "      44
+pivot                  Integer                                    
+resul                  Integer                                    
+_1                     CTE_INT        1                           
+_STR4                  String         "El valor de pivot debe ser >= 1"      33
+_STR5                  String         "La lista está vacía"      23
+_STR6                  String         "La lista tiene menos elementos que el indicado"      48
+_STR7                  String         "Elementos impares no encontrados"      34
+_STR8                  String         "No existen suficientes elementos impares para el cálculo"      59
+_2                     CTE_INT        2                           
+_21                    CTE_INT        21                          
+@aux22                 Integer                                    
+@aux24                 Integer                                    
+_7                     CTE_INT        7                           
+@aux28                 Integer                                    
+@aux30                 Integer                                    
+_44                    CTE_INT        44                          
+_40                    CTE_INT        40                          
+_33                    CTE_INT        33                          
+@aux34                 Integer                                    
+@aux36                 Integer                                    
+_5                     CTE_INT        5                           
+@aux40                 Integer                                    
+@aux42                 Integer                                    
+_4                     CTE_INT        4                           
+_STR25                 String         "El resultado es: "       19
+@auxResultado          Integer                                    
+@auxSumas              Integer                                    

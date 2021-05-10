@@ -1,0 +1,345 @@
+Gramática
+
+    0 $accept: s $end
+
+    1 s: prog
+
+    2 prog: sent
+    3     | prog sent
+
+    4 sent: read
+    5     | write
+    6     | asig
+
+    7 read: READ ID
+
+    8 $@1: /* vacío */
+
+    9 asig: ID $@1 ASIGNA sumaimpar
+
+   10 $@2: /* vacío */
+
+   11 sumaimpar: SUMAIMPAR PARA ID $@2 sumaimpar2
+
+   12 sumaimpar2: PYC CA lista CC PARC
+   13           | PYC CA CC PARC
+
+   14 lista: CTE
+   15      | lista COMA CTE
+
+   16 write: WRITE CTE_S
+   17      | WRITE ID
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+WRITE (258) 16 17
+READ (259) 7
+SUMAIMPAR (260) 11
+CTE (261) 14 15
+CTE_S (262) 16
+ID (263) 7 9 11 17
+COMA (264) 15
+PYC (265) 12 13
+ASIGNA (266) 9
+PARA (267) 11
+PARC (268) 12 13
+CA (269) 12 13
+CC (270) 12 13
+
+
+No terminales con las reglas donde aparecen
+
+$accept (16)
+    en la izquierda: 0
+s (17)
+    en la izquierda: 1, en la derecha: 0
+prog (18)
+    en la izquierda: 2 3, en la derecha: 1 3
+sent (19)
+    en la izquierda: 4 5 6, en la derecha: 2 3
+read (20)
+    en la izquierda: 7, en la derecha: 4
+asig (21)
+    en la izquierda: 9, en la derecha: 6
+$@1 (22)
+    en la izquierda: 8, en la derecha: 9
+sumaimpar (23)
+    en la izquierda: 11, en la derecha: 9
+$@2 (24)
+    en la izquierda: 10, en la derecha: 11
+sumaimpar2 (25)
+    en la izquierda: 12 13, en la derecha: 11
+lista (26)
+    en la izquierda: 14 15, en la derecha: 12 15
+write (27)
+    en la izquierda: 16 17, en la derecha: 5
+
+
+estado 0
+
+    0 $accept: . s $end
+
+    WRITE  desplazar e ir al estado 1
+    READ   desplazar e ir al estado 2
+    ID     desplazar e ir al estado 3
+
+    s      ir al estado 4
+    prog   ir al estado 5
+    sent   ir al estado 6
+    read   ir al estado 7
+    asig   ir al estado 8
+    write  ir al estado 9
+
+
+estado 1
+
+   16 write: WRITE . CTE_S
+   17      | WRITE . ID
+
+    CTE_S  desplazar e ir al estado 10
+    ID     desplazar e ir al estado 11
+
+
+estado 2
+
+    7 read: READ . ID
+
+    ID  desplazar e ir al estado 12
+
+
+estado 3
+
+    9 asig: ID . $@1 ASIGNA sumaimpar
+
+    $default  reduce usando la regla 8 ($@1)
+
+    $@1  ir al estado 13
+
+
+estado 4
+
+    0 $accept: s . $end
+
+    $end  desplazar e ir al estado 14
+
+
+estado 5
+
+    1 s: prog .
+    3 prog: prog . sent
+
+    WRITE  desplazar e ir al estado 1
+    READ   desplazar e ir al estado 2
+    ID     desplazar e ir al estado 3
+
+    $default  reduce usando la regla 1 (s)
+
+    sent   ir al estado 15
+    read   ir al estado 7
+    asig   ir al estado 8
+    write  ir al estado 9
+
+
+estado 6
+
+    2 prog: sent .
+
+    $default  reduce usando la regla 2 (prog)
+
+
+estado 7
+
+    4 sent: read .
+
+    $default  reduce usando la regla 4 (sent)
+
+
+estado 8
+
+    6 sent: asig .
+
+    $default  reduce usando la regla 6 (sent)
+
+
+estado 9
+
+    5 sent: write .
+
+    $default  reduce usando la regla 5 (sent)
+
+
+estado 10
+
+   16 write: WRITE CTE_S .
+
+    $default  reduce usando la regla 16 (write)
+
+
+estado 11
+
+   17 write: WRITE ID .
+
+    $default  reduce usando la regla 17 (write)
+
+
+estado 12
+
+    7 read: READ ID .
+
+    $default  reduce usando la regla 7 (read)
+
+
+estado 13
+
+    9 asig: ID $@1 . ASIGNA sumaimpar
+
+    ASIGNA  desplazar e ir al estado 16
+
+
+estado 14
+
+    0 $accept: s $end .
+
+    $default  aceptar
+
+
+estado 15
+
+    3 prog: prog sent .
+
+    $default  reduce usando la regla 3 (prog)
+
+
+estado 16
+
+    9 asig: ID $@1 ASIGNA . sumaimpar
+
+    SUMAIMPAR  desplazar e ir al estado 17
+
+    sumaimpar  ir al estado 18
+
+
+estado 17
+
+   11 sumaimpar: SUMAIMPAR . PARA ID $@2 sumaimpar2
+
+    PARA  desplazar e ir al estado 19
+
+
+estado 18
+
+    9 asig: ID $@1 ASIGNA sumaimpar .
+
+    $default  reduce usando la regla 9 (asig)
+
+
+estado 19
+
+   11 sumaimpar: SUMAIMPAR PARA . ID $@2 sumaimpar2
+
+    ID  desplazar e ir al estado 20
+
+
+estado 20
+
+   11 sumaimpar: SUMAIMPAR PARA ID . $@2 sumaimpar2
+
+    $default  reduce usando la regla 10 ($@2)
+
+    $@2  ir al estado 21
+
+
+estado 21
+
+   11 sumaimpar: SUMAIMPAR PARA ID $@2 . sumaimpar2
+
+    PYC  desplazar e ir al estado 22
+
+    sumaimpar2  ir al estado 23
+
+
+estado 22
+
+   12 sumaimpar2: PYC . CA lista CC PARC
+   13           | PYC . CA CC PARC
+
+    CA  desplazar e ir al estado 24
+
+
+estado 23
+
+   11 sumaimpar: SUMAIMPAR PARA ID $@2 sumaimpar2 .
+
+    $default  reduce usando la regla 11 (sumaimpar)
+
+
+estado 24
+
+   12 sumaimpar2: PYC CA . lista CC PARC
+   13           | PYC CA . CC PARC
+
+    CTE  desplazar e ir al estado 25
+    CC   desplazar e ir al estado 26
+
+    lista  ir al estado 27
+
+
+estado 25
+
+   14 lista: CTE .
+
+    $default  reduce usando la regla 14 (lista)
+
+
+estado 26
+
+   13 sumaimpar2: PYC CA CC . PARC
+
+    PARC  desplazar e ir al estado 28
+
+
+estado 27
+
+   12 sumaimpar2: PYC CA lista . CC PARC
+   15 lista: lista . COMA CTE
+
+    COMA  desplazar e ir al estado 29
+    CC    desplazar e ir al estado 30
+
+
+estado 28
+
+   13 sumaimpar2: PYC CA CC PARC .
+
+    $default  reduce usando la regla 13 (sumaimpar2)
+
+
+estado 29
+
+   15 lista: lista COMA . CTE
+
+    CTE  desplazar e ir al estado 31
+
+
+estado 30
+
+   12 sumaimpar2: PYC CA lista CC . PARC
+
+    PARC  desplazar e ir al estado 32
+
+
+estado 31
+
+   15 lista: lista COMA CTE .
+
+    $default  reduce usando la regla 15 (lista)
+
+
+estado 32
+
+   12 sumaimpar2: PYC CA lista CC PARC .
+
+    $default  reduce usando la regla 12 (sumaimpar2)
